@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 $primary: #16161d;
+$secondary: #F2A032;
 $white: #fff;
 $light-grey: #ebebeb;
 $grey: #f5f5f5;
@@ -29,11 +30,16 @@ $grey: #f5f5f5;
       @media (max-width: 767px) {
           @content;
       }
-  } @else if $device == 'tablet' {
-      @media (min-width: 768px) {
+  } @else if $device == 'mobile-intermediate' {
+      @media (min-width: 500px) {
           @content;
       }
-  } @else if $device == 'desktop' {
+  } @else if $device == 'tablet' {
+    @media (min-width: 768px) {
+        @content;
+    }
+}
+  @else if $device == 'desktop' {
       @media (min-width: 1024px) {
           @content;
       }
@@ -69,7 +75,7 @@ $grey: #f5f5f5;
   background-color: $bg-color;
   color: $text-color;
   padding: 12px 20px;
-  border: 1px solid $border-color;
+  border: 4px solid $border-color;
   border-radius: 70px;
   cursor: pointer;
   text-align: center;
@@ -85,7 +91,7 @@ $grey: #f5f5f5;
 
 @mixin full-width-section($background-color: $primary) {
   width: 100%;
-  background-color: $background-color; // Couleur de fond qui s'étend sur toute la largeur de l'écran
+  background-color: $background-color;
 
   .container {
     max-width: 1440px;
@@ -112,18 +118,22 @@ h1 {
   }
   h2 {
     @include google-font("Roboto", 700, false);
-    font-size: 1.5rem;
+    font-size: 2.3rem;
     margin: 0 12px;
+    color: primary;
+    margin-bottom: 32px;
+    text-align: center;
+    width: 100%;
   @include responsive('tablet') {
     font-size: 2.5rem;
+  }
 }
+h3 {
   color: $primary;
-  margin-bottom: 32px
-
 }
 .typed-text {
   @include google-font("Roboto Mono", 200, false);
-  color: #333; // Optionnel : ajouter d'autres styles
+  color: $primary;
 }
 header {
   @include full-width-section($grey);
@@ -135,7 +145,11 @@ header {
 .hero {
   @include flexbox(column, center, center, wrap);
   margin: 0 12px;
+  max-width: 400px;
   padding: 100px 0;
+  @include responsive('tablet') {
+    margin: 0 auto;
+  }
   &__buttons {
     @include flexbox(column, center, stretch, wrap);
     width: 100%;
@@ -144,7 +158,10 @@ header {
       @include flexbox(row, center, center, wrap);
   }
     &__light {
-      @include button($light-grey, $primary);
+      @include button($white, $primary, $light-grey);
+    }
+    &__dark {
+      @include button();
     }
   }
   .portrait {
@@ -162,11 +179,10 @@ header {
   .hero__content__ityped {
     height: 30px;
   }
-  button {
-      @include button();
-      width: 100%;
+  .button {
       @include responsive('tablet') {
-        width: auto;
+        //width: auto;
+        flex: 1;
       }
   }
   .nav {
@@ -214,6 +230,7 @@ section {
   }
 }
   .company {
+    @include full-width-section($white);
     &__logos {
       @include flexbox(column, center, center);
       gap: 50px;
@@ -221,7 +238,7 @@ section {
         @include flexbox(row, center, center);
       }
       &__container {
-        filter: grayscale(100%);
+        //filter: grayscale(100%);
         width: 100px;
         @include responsive('tablet') {
           height: 30px;
@@ -231,25 +248,47 @@ section {
     }
   }
   
+.infos {
+  //background-color: rgba(255, 255, 255, 0.5);
+  
+  position: absolute;
+  bottom: 0;
+  z-index: 2;
+  height: 0;
+  width: 100%;
+  transition: height 0.8s ease;
+  background: linear-gradient(
+    to bottom, 
+    rgba(255, 255, 255, 0) 0%,   /* Blanc opaque en haut */
+    rgba(255, 255, 255, 0.5) 60%, 
+    rgba(255, 255, 255, 0.8) 90%, 
+    rgba(255, 255, 255, 0.9) 100%  /* Blanc opaque en bas */
+);
+//filter: blur(20px);
+  @include flexbox(row, space-between, flex-end);
+
+  //opacity: 0.2;
+}
+
   .projects {
-    background-color: $grey;
-    border: 1px #ebebeb solid;
+    @include full-width-section($white);
     &__details {
-      @include flexbox(column);
+      //@include flexbox(column, center, center, wrap);
       gap: 12px;
-      height: 550px;
-      @include responsive('tablet') {
-        @include flexbox(row);
-        height: 250px;
+      //height: 700px;
+      display: flex; 
+      flex-wrap: wrap;
+      justify-content: center;
+      @include responsive('desktop') {
+       @include flexbox(row, center, center);
       }
       h3 {
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%); 
+        bottom: 20px;
+        left: 20px;
+        //transform: translate(-50%, -50%); 
         margin: 0;
-        color: $primary;
-        font-size: 2rem;
+        font-size: 1.2rem;
         z-index: 5;
         transition: display 0.8s ease;
         @include responsive('tablet') {
@@ -259,20 +298,29 @@ section {
       &__container {
         position: relative;
         overflow: hidden;
-        max-width: 250px;
-        flex: 1 1 22%;
-        opacity: 0.5;
+        max-width: 100%;
+        flex: 1 1 100%;
+        //opacity: 0.5;
         transition: opacity 0.8s ease;
-        filter: grayscale(100%);
         z-index: 2;
+        filter: grayscale(70%);
+        @include responsive('mobile-intermediate') {
+          flex: 1 1 calc(50% - 20px); // 2 par ligne avec un espace de 20px entre les éléments
+        max-width: calc(50% - 20px);
+        }
+        @include responsive('desktop') {
+          flex: 1 1 calc(25% - 20px); // 4 par ligne avec un espace de 20px entre les éléments
+          max-width: calc(25% - 20px);
+        }
         .link-content {
           position: absolute;
           bottom: 20px;
           right: 20px;
-          display: flex;
-          align-items: center;
-          gap: 5px;
-          z-index: 1;
+          display: none;
+          // align-items: center;
+          // gap: 5px;
+          // z-index: 1;
+          transition: display 0.8s ease;
           .arrow {
             display: inline-block;
             transition: transform 0.3s ease;
@@ -285,14 +333,51 @@ section {
           height: 100%;
           position: relative;
           text-decoration: none;
-          transition: opacity 0.3s ease;
-          opacity: 0.6;
+          //transition: opacity 0.3s ease;
+          //opacity: 0.6;
+          // &::after {
+          //   content: "";
+          //   width: 100%;
+          //   height: 0%;
+          //   background: linear-gradient(
+          //     to top,
+          //     rgba(255, 255, 255, 0.4),
+          //     rgb(255, 255, 255)
+          //   );
+          //   filter: blur(10px);
+          //   pointer-events: none;
+          //   transition: height 0.8s ease;
+          // }
+          img {
+            width: 100%;
+            height: auto;
+            display: block;
+          }
         }
         &:hover {
-          opacity: 1;
-          filter: grayscale(0%);
-          h3 {
+          //opacity: 1;
+          filter: grayscale(10%);
+          // .card-link::after {
+          //     content: "";
+          //     position: absolute;
+          //     bottom: 0;
+          //     left: 0;
+          //     width: 100%;
+          //     height: 24%;
+          //     background: linear-gradient(
+          //       to top,
+          //       rgba(255, 255, 255, 1),
+          //       rgb(255, 255, 255, 0.4)
+          //     );
+          //     filter: blur(10px);
+          //     pointer-events: none;
+          // }
+          h3,
+          .link-content {
             display: block;
+          }
+          .infos {
+            height: 80px;
           }
           .arrow {
             transform: translateX(5px);
@@ -303,9 +388,14 @@ section {
 }
 
 .contact {
+  @include full-width-section($grey);
+  border: 1px solid $light-grey;
+  border-radius: 60px 60px 0 0;
   width: 100%;
+  margin: 0 auto;
   .container {
     width: 100%;
+    max-width: 400px;
   }
   &__container {
     @include flexbox(column, stretch, stretch);
@@ -327,15 +417,13 @@ section {
     @include button();
   }
   .button-whatsapp {
-    @include button($grey, $primary, $light-grey);
+    @include button($white, $primary, $light-grey);
   }
 }
 
 footer {
 padding: 40px 0;
 background-color: $grey;
-border: 1px solid $light-grey;
-border-radius: 60px 60px 0 0;
 .nav {
   ul {
     @include flexbox(column, center, center);

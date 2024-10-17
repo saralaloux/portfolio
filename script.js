@@ -52,3 +52,8 @@ function initItyped(element, options) {
 
     type();
 }
+
+///////////////////// CV /////////////////////
+document.getElementById("resumeButton").addEventListener("click", function() {
+    window.open("./src/assets/laloux-cv-ux-2024.pdf", "_blank");
+});
