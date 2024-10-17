@@ -1,0 +1,353 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+$primary: #16161d;
+$white: #fff;
+$light-grey: #ebebeb;
+$grey: #f5f5f5;
+
+///////////////// FONT /////////////////
+@mixin google-font($family: "Roboto", $weight: 400, $italic: false) {
+  font-family: #{$family}, sans-serif;
+  font-weight: $weight;
+  font-style: if($italic, italic, normal);
+}
+
+// Exemple d'utilisation de la mixin
+.example-roboto {
+  @include google-font("Roboto", 700, false);
+}
+
+.example-roboto-mono {
+  @include google-font("Roboto Mono", 300, true);
+}
+
+  ///////////////// BREAKPOINT /////////////////
+
+@mixin responsive($device) {
+  @if $device == 'mobile' {
+      @media (max-width: 767px) {
+          @content;
+      }
+  } @else if $device == 'tablet' {
+      @media (min-width: 768px) {
+          @content;
+      }
+  } @else if $device == 'desktop' {
+      @media (min-width: 1024px) {
+          @content;
+      }
+  }
+}
+
+  ///////////////// FLEXBOX /////////////////
+ 
+  @mixin flexbox(
+  $direction: row, 
+  $justify: flex-start, 
+  $align: stretch, 
+  $wrap: nowrap
+) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: $wrap;
+}
+.example-container {
+  @include flexbox(column, center, center, wrap);
+}
+
+  ///////////////// BUTTONS /////////////////
+
+@mixin button(
+  $bg-color: $primary,
+  $text-color: $light-grey,
+  $border-color: $text-color,
+  $hover-bg-color: darken($bg-color, 10%)
+) {
+  background-color: $bg-color;
+  color: $text-color;
+  padding: 12px 20px;
+  border: 1px solid $border-color;
+  border-radius: 70px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  font-size: 0.75rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+
+  &:hover {
+    background-color: $hover-bg-color;
+    border-color: darken($border-color, 10%);
+  }
+}
+
+@mixin full-width-section($background-color: $primary) {
+  width: 100%;
+  background-color: $background-color; // Couleur de fond qui s'étend sur toute la largeur de l'écran
+
+  .container {
+    max-width: 1440px;
+    margin: 0 12px;
+  }
+}
+
+ ///////////////// CODE /////////////////
+ ///////////////// CODE /////////////////
+ ///////////////// CODE /////////////////
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+    @include google-font("Roboto", 400, false);
+    margin: 0 auto;
+    position: relative;
+}
+h1 {
+    @include google-font("Roboto", 300, false);
+    font-size: 1rem;
+    padding: 12px 0;
+  }
+  h2 {
+    @include google-font("Roboto", 700, false);
+    font-size: 1.5rem;
+    margin: 0 12px;
+  @include responsive('tablet') {
+    font-size: 2.5rem;
+}
+  color: $primary;
+  margin-bottom: 32px
+
+}
+.typed-text {
+  @include google-font("Roboto Mono", 200, false);
+  color: #333; // Optionnel : ajouter d'autres styles
+}
+header {
+  @include full-width-section($grey);
+  position: relative;
+  border: 1px #ebebeb solid;
+  border-radius: 0 0 60px 60px;
+}
+
+.hero {
+  @include flexbox(column, center, center, wrap);
+  margin: 0 12px;
+  padding: 100px 0;
+  &__buttons {
+    @include flexbox(column, center, stretch, wrap);
+    width: 100%;
+    gap: 20px;
+    @include responsive('tablet') {
+      @include flexbox(row, center, center, wrap);
+  }
+    &__light {
+      @include button($light-grey, $primary);
+    }
+  }
+  .portrait {
+    width: 150px;
+    height: 150px;
+    background-image: url('../../assets/portrait.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    border: 4px solid $white;
+  }
+}
+
+  .hero__content__ityped {
+    height: 30px;
+  }
+  button {
+      @include button();
+      width: 100%;
+      @include responsive('tablet') {
+        width: auto;
+      }
+  }
+  .nav {
+    background-color: $grey;
+    //position: fixed;
+    ul {
+      @include flexbox(row, right, center, wrap);
+      padding: 12px 24px;
+      gap: 12px;
+      li {
+        list-style-type: none;
+        a,
+        span {
+          @include google-font("Roboto", 300, false);
+          font-size: 12px;
+      
+        }
+        a {
+          position: relative;
+          text-decoration: none;
+          color: $primary;
+          &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 1px; // Épaisseur du soulignement
+            background-color: $primary; // Couleur du soulignement
+            transition: width 0.3s ease;
+          }
+          &:hover::after {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+section {
+  @include flexbox(column, center, center);
+  padding: 100px 0;
+  gap: 32px;
+  .container {
+    @include flexbox(column, center, center);
+  }
+}
+  .company {
+    &__logos {
+      @include flexbox(column, center, center);
+      gap: 50px;
+      @include responsive('tablet') {
+        @include flexbox(row, center, center);
+      }
+      &__container {
+        filter: grayscale(100%);
+        width: 100px;
+        @include responsive('tablet') {
+          height: 30px;
+          width: auto;
+        }
+      }
+    }
+  }
+  
+  .projects {
+    background-color: $grey;
+    border: 1px #ebebeb solid;
+    &__details {
+      @include flexbox(column);
+      gap: 12px;
+      height: 550px;
+      @include responsive('tablet') {
+        @include flexbox(row);
+        height: 250px;
+      }
+      h3 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); 
+        margin: 0;
+        color: $primary;
+        font-size: 2rem;
+        z-index: 5;
+        transition: display 0.8s ease;
+        @include responsive('tablet') {
+          display: none;
+        }
+    }
+      &__container {
+        position: relative;
+        overflow: hidden;
+        max-width: 250px;
+        flex: 1 1 22%;
+        opacity: 0.5;
+        transition: opacity 0.8s ease;
+        filter: grayscale(100%);
+        z-index: 2;
+        .link-content {
+          position: absolute;
+          bottom: 20px;
+          right: 20px;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          z-index: 1;
+          .arrow {
+            display: inline-block;
+            transition: transform 0.3s ease;
+            margin-left: 5px;
+          }
+        }
+        .card-link {
+          display: block;
+          width: 100%;
+          height: 100%;
+          position: relative;
+          text-decoration: none;
+          transition: opacity 0.3s ease;
+          opacity: 0.6;
+        }
+        &:hover {
+          opacity: 1;
+          filter: grayscale(0%);
+          h3 {
+            display: block;
+          }
+          .arrow {
+            transform: translateX(5px);
+          }
+      }
+      }
+    } 
+}
+
+.contact {
+  width: 100%;
+  .container {
+    width: 100%;
+  }
+  &__container {
+    @include flexbox(column, stretch, stretch);
+    width: 100%;
+    gap: 20px;
+    @include responsive('tablet') {
+      @include flexbox(row, center, center);
+    }
+
+  }
+  .button-gmail,
+  .button-whatsapp {
+    margin: 0 12px;
+    @include responsive('tablet') {
+     margin: 0 0;
+    }
+  }
+  .button-gmail {
+    @include button();
+  }
+  .button-whatsapp {
+    @include button($grey, $primary, $light-grey);
+  }
+}
+
+footer {
+padding: 40px 0;
+background-color: $grey;
+border: 1px solid $light-grey;
+border-radius: 60px 60px 0 0;
+.nav {
+  ul {
+    @include flexbox(column, center, center);
+    @include responsive('tablet') {
+      @include flexbox(row, center, center);
+    }
+    span {
+      display: none;
+      @include responsive('tablet') {
+        display: block;
+      }
+    }
+  }
+}
+}
