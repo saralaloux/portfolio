@@ -330,6 +330,7 @@ section .container {
   background-color: rgba(255, 255, 255, 0.5);
   transition: background-color 0.3s ease;
   z-index: 5;
+  pointer-events: none;
 }
 .projects__details__container .link-content {
   position: absolute;
