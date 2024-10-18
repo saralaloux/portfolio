@@ -125,7 +125,8 @@ h1 {
     text-align: center;
     width: 100%;
   @include responsive('tablet') {
-    font-size: 2.5rem;
+    font-size: 2rem; 
+    max-width: 650px;
   }
 }
 h3 {
@@ -237,6 +238,7 @@ section {
       gap: 50px;
       @include responsive('tablet') {
         @include flexbox(row, center, center);
+        padding: 20px 0;
       }
       &__container {
         width: 100px;
@@ -338,6 +340,9 @@ section {
   border-radius: 60px 60px 0 0;
   width: 100%;
   margin: 0 auto;
+  @include responsive('tablet') {
+    padding: 120px 0;
+  }
   .container {
     width: 100%;
     max-width: 400px;
