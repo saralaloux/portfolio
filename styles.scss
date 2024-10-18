@@ -76,7 +76,7 @@ $grey: #f5f5f5;
   color: $text-color;
   padding: 12px 20px;
   border: 4px solid $border-color;
-  border-radius: 70px;
+  border-radius: 40px;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
@@ -181,13 +181,11 @@ header {
   }
   .button {
       @include responsive('tablet') {
-        //width: auto;
         flex: 1;
       }
   }
   .nav {
     background-color: $grey;
-    //position: fixed;
     ul {
       @include flexbox(row, right, center, wrap);
       padding: 12px 24px;
@@ -210,8 +208,8 @@ header {
             left: 0;
             bottom: 0;
             width: 0;
-            height: 1px; // Épaisseur du soulignement
-            background-color: $primary; // Couleur du soulignement
+            height: 1px;
+            background-color: $primary;
             transition: width 0.3s ease;
           }
           &:hover::after {
@@ -223,8 +221,11 @@ header {
   }
 section {
   @include flexbox(column, center, center);
-  padding: 100px 0;
+  padding: 40px 0;
   gap: 32px;
+  @include responsive('tablet') {
+    padding: 52px 0;
+  }
   .container {
     @include flexbox(column, center, center);
   }
@@ -238,7 +239,6 @@ section {
         @include flexbox(row, center, center);
       }
       &__container {
-        //filter: grayscale(100%);
         width: 100px;
         @include responsive('tablet') {
           height: 30px;
@@ -247,35 +247,11 @@ section {
       }
     }
   }
-  
-.infos {
-  //background-color: rgba(255, 255, 255, 0.5);
-  
-  position: absolute;
-  bottom: 0;
-  z-index: 2;
-  height: 0;
-  width: 100%;
-  transition: height 0.8s ease;
-  background: linear-gradient(
-    to bottom, 
-    rgba(255, 255, 255, 0) 0%,   /* Blanc opaque en haut */
-    rgba(255, 255, 255, 0.5) 60%, 
-    rgba(255, 255, 255, 0.8) 90%, 
-    rgba(255, 255, 255, 0.9) 100%  /* Blanc opaque en bas */
-);
-//filter: blur(20px);
-  @include flexbox(row, space-between, flex-end);
-
-  //opacity: 0.2;
-}
 
   .projects {
     @include full-width-section($white);
     &__details {
-      //@include flexbox(column, center, center, wrap);
       gap: 12px;
-      //height: 700px;
       display: flex; 
       flex-wrap: wrap;
       justify-content: center;
@@ -283,34 +259,42 @@ section {
        @include flexbox(row, center, center);
       }
       h3 {
+        @include google-font("Roboto Mono", 300, true);
         position: absolute;
-        bottom: 20px;
-        left: 20px;
-        //transform: translate(-50%, -50%); 
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); 
         margin: 0;
-        font-size: 1.2rem;
+        font-size: 1.5rem;
+        width: 100%;
+        text-align: center;
         z-index: 5;
-        transition: display 0.8s ease;
-        @include responsive('tablet') {
-          display: none;
-        }
+
     }
       &__container {
         position: relative;
         overflow: hidden;
         max-width: 100%;
         flex: 1 1 100%;
-        //opacity: 0.5;
         transition: opacity 0.8s ease;
         z-index: 2;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0);
+        transition: box-shadow 0.5s ease;
         filter: grayscale(70%);
-        @include responsive('mobile-intermediate') {
-          flex: 1 1 calc(50% - 20px); // 2 par ligne avec un espace de 20px entre les éléments
-        max-width: calc(50% - 20px);
-        }
-        @include responsive('desktop') {
-          flex: 1 1 calc(25% - 20px); // 4 par ligne avec un espace de 20px entre les éléments
+          @include responsive('tablet') {
+          flex: 1 1 calc(25% - 20px);
           max-width: calc(25% - 20px);
+        }
+        &:before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(255, 255, 255, 0.5);
+          transition: background-color 0.3s ease;
+          z-index: 5;
         }
         .link-content {
           position: absolute;
@@ -333,21 +317,7 @@ section {
           height: 100%;
           position: relative;
           text-decoration: none;
-          //transition: opacity 0.3s ease;
-          //opacity: 0.6;
-          // &::after {
-          //   content: "";
-          //   width: 100%;
-          //   height: 0%;
-          //   background: linear-gradient(
-          //     to top,
-          //     rgba(255, 255, 255, 0.4),
-          //     rgb(255, 255, 255)
-          //   );
-          //   filter: blur(10px);
-          //   pointer-events: none;
-          //   transition: height 0.8s ease;
-          // }
+          z-index: 1;
           img {
             width: 100%;
             height: auto;
@@ -355,33 +325,8 @@ section {
           }
         }
         &:hover {
-          //opacity: 1;
           filter: grayscale(10%);
-          // .card-link::after {
-          //     content: "";
-          //     position: absolute;
-          //     bottom: 0;
-          //     left: 0;
-          //     width: 100%;
-          //     height: 24%;
-          //     background: linear-gradient(
-          //       to top,
-          //       rgba(255, 255, 255, 1),
-          //       rgb(255, 255, 255, 0.4)
-          //     );
-          //     filter: blur(10px);
-          //     pointer-events: none;
-          // }
-          h3,
-          .link-content {
-            display: block;
-          }
-          .infos {
-            height: 80px;
-          }
-          .arrow {
-            transform: translateX(5px);
-          }
+          box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
       }
       }
     } 
@@ -438,4 +383,89 @@ background-color: $grey;
     }
   }
 }
+}
+
+
+/////////////////////////// SITE DETAIL ///////////////////////////
+
+
+.cover-detail {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-bottom: 20px;
+  img {
+    width: 100%;
+  }
+}
+.projects-detail {
+  @include full-width-section($grey);
+  position: relative;
+  border-bottom: 1px #ebebeb solid;
+  border-radius: 0 0 60px 60px;
+  padding: 40px 0;
+  .container {
+    @include responsive('desktop') {
+      margin: 0 auto;
+    }
+  }
+  .button {
+    margin: 0 auto;
+    @include responsive('mobile-intermediate') {
+      max-width: 190px;
+      flex: unset;
+    }
+    @include responsive('tablet') {
+      max-width: 190px;
+      flex: unset;
+    }
+  }
+}
+.project-detail-resume {
+  @include full-width-section($white);
+  @include flexbox(column, center, center);
+  margin: 0 auto;
+  h1 {
+    @include google-font("Roboto", 700, false);
+    text-align: center;
+    color: $primary;
+    font-size: 3rem;
+    padding: 40px 0;
+  }
+  h2 {
+    @include google-font("Roboto Mono", 700, false);
+    font-size: 1rem;
+  }
+  p {
+    @include google-font("Roboto", 300, false);
+    font-size: 1.2rem;
+    line-height: 28px;
+    max-width: 700px;
+    display: block;
+    margin: 0 auto;
+    padding-bottom: 32px;
+  }
+  .img-container {
+    width: 100%;
+    img {
+      width: 100%;
+    }
+  }
+  .link {
+    @include flexbox(column, center, stretch);
+    padding: 40px 0;
+    margin: 0 auto;
+    @include responsive('mobile-intermediate') {
+      @include flexbox(row, center, stretch);
+      max-width: 400px;
+      gap: 20px;
+    }
+    .button {
+      flex: 1;
+    }
+  }
+}
+.detail-footer {
+  border: 1px #ebebeb solid;
+  border-radius: 60px 60px 0 0;
 }
