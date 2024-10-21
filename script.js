@@ -57,3 +57,13 @@ function initItyped(element, options) {
 document.getElementById("resumeButton").addEventListener("click", function() {
     window.open("./src/assets/laloux-cv-ux-2024.pdf", "_blank");
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const burgerMenu = document.querySelector("#burger-menu");
+    const menu = document.querySelector("#menu");
+
+    burgerMenu.addEventListener("click", () => {
+        burgerMenu.classList.toggle("close");
+        menu.classList.toggle("overlay");
+    });
+});

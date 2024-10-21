@@ -7,6 +7,7 @@
     <title>Sara Laloux - Portfolio</title>
 </head>
 <body>
+   
     <header id="homepage">
         <div class="container">
             <nav>
@@ -22,14 +23,16 @@
             </nav>
         </div>
         <div class="hero">
-            <div class="portrait"></div>
-            <h1>Hi, i'm Sara Laloux</h1>
-            <div class="hero__content__ityped">
-                <p><span class="typed-text" id="typed-text"></span></p>
-            </div>
-            <div class="hero__buttons">
-                <a class=" button hero__buttons__dark" href="https://www.linkedin.com/in/saralaloux/">My Linkedin</a>
-                <a class="button hero__buttons__light" id="resumeButton">My resume</a>
+            <div class="container">
+                <div class="portrait"></div>
+                <h1>Hi, i'm Sara Laloux</h1>
+                <div class="hero__content__ityped">
+                    <p><span class="typed-text" id="typed-text"></span></p>
+                </div>
+                <div class="container-buttons">
+                    <a class="button dark" href="https://www.linkedin.com/in/saralaloux/">My Linkedin</a>
+                    <a class="button light" id="resumeButton">My resume</a>
+                </div>
             </div>
         </div>
     </header>
@@ -40,45 +43,33 @@
                 <h2>UX & UI designer for these projects</h2>
                 <div class="projects__details">
                     <div class="projects__details__container">
-                        <div class="infos">
+                        <a href="iram-detail.html" class="card-link iram">          
                             <h3>IRAM</h3>
-                            <!-- <div class="link-content">
-                                <span class="see-more">See more</span>
-                                <span class="arrow">→</span>
-                            </div> -->
-                        </div>
-                        <a href="iram-detail.html" class="card-link">
-                            <img src="./src/assets/iram.jpg" alt="">            
+                            <img src="./src/assets/iram.jpg" alt="">
                         </a>
-                        <div class="infos">
-                            <!-- <div class="link-content">
-                                <span class="see-more">See more</span>
-                                <span class="arrow">→</span>
-                            </div> -->
-                        </div>
                     </div>  
                     <div class="projects__details__container">
                         <div class="infos">
-                            <h3>Boule de bleu</h3>
                             <!-- <div class="link-content">
                                 <span class="see-more">See more</span>
                                 <span class="arrow">→</span>
                             </div> -->
                         </div>
-                        <a href="bdb-detail.html" class="card-link">
-                            <img src="./src/assets/aperos.jpg" alt="">            
+                        <a href="bdb-detail.html" class="card-link bdb">
+                            <h3>Boule de bleu</h3>
+                            <img src="./src/assets/aperos.jpg" alt="">
                         </a>
                     </div> 
                     <div class="projects__details__container">
                         <div class="infos">
-                            <h3>Proximus</h3>
                             <!-- <div class="link-content">
                                 <span class="see-more">See more</span>
                                 <span class="arrow">→</span>
                             </div> -->
                         </div>
-                        <a href="proximus-detail.html" class="card-link">
-                            <img src="./src/assets/proximus.jpg" alt="">            
+                        <a href="proximus-detail.html" class="card-link proximus">
+                            <h3>Proximus</h3>
+                            <img src="./src/assets/proximus.jpg" alt="">
                         </a>
                     </div> 
                 </div>
@@ -88,10 +79,10 @@
             <div class="container">
                 <h2>I was web integrator for these companies</h2>
                 <div class="company__logos">
-                    <img class="company__logos__container" src="./src/assets/logo-unamur.svg" alt="">
+                    <img class="company__logos__container" src="./src/assets/logo-unamur.png" alt="">
                     <img class="company__logos__container" src="./src/assets/logo-leonidas.png" alt="">
                     <img class="company__logos__container" src="./src/assets/logo-atoutcamp.png" alt="">
-                    <img class="company__logos__container" src="./src/assets/logo-iba.svg" alt="">
+                    <img class="company__logos__container" src="./src/assets/logo-iba.png" alt="">
                     <img class="company__logos__container" src="./src/assets/logo-soco.png" alt="">
                     <img class="company__logos__container" src="./src/assets/logo-sonaca.png" alt="">
                 </div>
@@ -100,9 +91,9 @@
         <section class="contact" id="contact">
             <div class="container">
                 <h2>Stay in touch?</h2>
-                <div class="contact__container">
-                    <a href="mailto:sara.laloux@gmail.com" class="button button-gmail" target="_blank">Contact Me via Gmail</a>
-                    <a href="https://wa.me/0492048282" class="button button-whatsapp" target="_blank">Contact Me via WhatsApp</a>
+                <div class="container-buttons">
+                    <a href="mailto:sara.laloux@gmail.com" class="button dark" target="_blank">Contact Me via Gmail</a>
+                    <a href="https://wa.me/0492048282" class="button light" target="_blank">Contact Me via WhatsApp</a>
                 </div>
             </div>
         </section>
@@ -120,6 +111,7 @@
             </div>
         </nav>
     </footer>
+
 
     <script src="./script.js"></script>
 </body>
